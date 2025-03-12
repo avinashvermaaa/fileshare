@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 
 const Home = () => {
+  const [selectedFiles, setSelectedFiles] = useState([]);
+
+  // Handle file selection
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    setSelectedFiles([...selectedFiles, ...files]); // Append new files
+  };
+
+  // Handle file upload button click
+  const handleUploadClick = () => {
+    document.getElementById("fileInput").click();
+  };
+
+  // Remove a file from the list
+  const handleRemoveFile = (index) => {
+    const updatedFiles = selectedFiles.filter((_, i) => i !== index);
+    setSelectedFiles(updatedFiles);
+  };
+
   return (
     <div className="container">
       {/* Header */}
       <div className="header">
         Sharekaro.io
         <p className="sub-header1">
-          Effortlessly Send & Receive Files - Secure🔐, Fast🚀and Hassle-Free✨!
+          Effortlessly Send & Receive Files - Secure🔐, Fast🚀 and
+          Hassle-Free✨!
         </p>
         <p className="sub-header2">
           "Say goodbye 👋 to complicated transfers and enjoy seamless🌟 file
@@ -29,7 +49,49 @@ const Home = () => {
         {/* File Upload Section */}
         <div className="upload-section">
           <h2>Transfer Your Files 🚀💙</h2>
-          <button className="button">Upload Files</button>
+          <input
+            type="file"
+            id="fileInput"
+            style={{ display: "none" }}
+            multiple
+            onChange={handleFileChange}
+          />
+          <button className="button" onClick={handleUploadClick}>
+            Upload Files
+          </button>
+
+          {selectedFiles.length > 0 && (
+            <div className="file-list">
+              <p className="file-count">
+                Selected Files: {selectedFiles.length}
+              </p>
+              <table>
+                <thead>
+                  <tr>
+                    <th>S.no.</th>
+                    <th>File Name</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedFiles.map((file, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}.</td>
+                      <td>{file.name}</td>
+                      <td>
+                        <button
+                          className="remove-button"
+                          onClick={() => handleRemoveFile(index)}
+                        >
+                           Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
 

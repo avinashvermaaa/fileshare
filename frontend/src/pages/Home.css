@@ -69,6 +69,54 @@
     max-width: 500px;
 }
 
+/* File listing */
+.file-list {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.file-count {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px dashed #0056b3;
+    /* Dashed border for table */
+}
+
+th,td {
+    border: 2px dashed #9ca3af;
+    /* Dashed border for cells */
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Remove Button Styling */
+.remove-button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.remove-button:hover {
+    background-color: rgb(21, 166, 233);
+}
+
+
 /* Footer (Fixed at bottom properly) */
 .footer {
     width: 100%;
