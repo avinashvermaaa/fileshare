@@ -1,6 +1,6 @@
 # Sharekaro.io
 
-Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨!
+Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! file-sharing web application built with **React, Node.js, Cloudinary, and Multer**.
 
 ## 📌 Features
 
@@ -11,13 +11,20 @@ Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨!
 * Backend powered by Node.js and Express
 * Seamless integration with Cloudinary for file storage
 
+
 ## 🚀 Tech Stack
 
-* **Frontend:** React, HTML, CSS
-* **Backend:** Node.js, Express.js
-* **Storage:** Cloudinary
-* **Database:** Not required (Cloudinary handles file storage)
-* **Short Links:** nanoid for generating short unique URLs
+### Frontend:
+- React.js
+- Axios
+- CSS & Tailwind CSS
+
+### Backend:
+- Node.js
+- Express.js
+- Multer (for file handling)
+- Cloudinary (for file storage)
+- Short Unique ID (for short links)
 
 ## 📥 Installation & Setup
 
@@ -57,14 +64,17 @@ Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨!
 3. Access the uploaded files via the generated short link.
 4. Manage files directly from the UI.
 
+## API Endpoints
+
+- `POST /upload` → Uploads files to Cloudinary & returns a short link.
+- `GET /file/:shortId` → Retrieves the file from Cloudinary using the short link.
+
+
 ## 💙 Contributing
 
 Contributions are welcome! Feel free to fork the repository and submit pull requests.
 
-## 📜 License
-
-This project is open-source and available under the MIT License.
-
 ---
 Made with 💙 by [Avinash Verma]
 
+Happy sharing with **Sharekaro.io**! 🎉
