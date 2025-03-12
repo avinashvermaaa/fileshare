@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Home.css";
+import axios from "axios"; // Ensure you have axios installed
 
 const Home = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -21,6 +22,39 @@ const Home = () => {
     setSelectedFiles(updatedFiles);
   };
 
+  // Handle sending files
+  const handleSendFiles = async () => {
+    if (selectedFiles.length === 0) {
+      alert("Please upload at least one file before sending.");
+      return;
+    }
+
+    const formData = new FormData();
+    selectedFiles.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/upload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Files sent successfully!");
+        setSelectedFiles([]); // Clear file list after sending
+      }
+    } catch (error) {
+      console.error("Error sending files:", error);
+      alert("Failed to send files. Try again.");
+    }
+  };
+
   return (
     <div className="container">
       {/* Header */}
@@ -40,7 +74,9 @@ const Home = () => {
       <div className="content">
         {/* Action Buttons */}
         <div className="buttons">
-          <button className="button">Send Files</button>
+          <button className="button" onClick={handleSendFiles}>
+            Send Files
+          </button>
           <button className="button">Request Files</button>
           <button className="button">Sent</button>
           <button className="button">Login</button>
