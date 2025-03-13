@@ -4,6 +4,7 @@ import axios from "axios"; // Ensure you have axios installed
 
 const Home = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [shortLinks, setShortLinks] = useState([]);
 
   // Handle file selection
   const handleFileChange = (event) => {
@@ -47,7 +48,8 @@ const Home = () => {
 
       if (response.status === 200) {
         alert("Files sent successfully!");
-        setSelectedFiles([]); // Clear file list after sending
+        setShortLinks(response.data.shortLinks);
+        setSelectedFiles([]);
       }
     } catch (error) {
       console.error("Error sending files:", error);
@@ -129,6 +131,18 @@ const Home = () => {
             </div>
           )}
         </div>
+        {shortLinks.length > 0 && (
+          <div className="short-links">
+            <h3>Generated Links:</h3>
+            {shortLinks.map((link, index) => (
+              <p key={index}>
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  {link}
+                </a>
+              </p>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Footer */}
