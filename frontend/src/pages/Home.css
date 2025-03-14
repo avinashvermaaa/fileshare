@@ -129,7 +129,18 @@ th {
     margin-top: auto;
     /* This pushes it to the bottom */
 }
+.footer a {
+    color: white;
+    /* Ensures links are white */
+    text-decoration: none;
+    /* Removes underline */
+    margin: 0 8px;
+}
 
+.footer a:hover {
+    text-decoration: underline;
+    /* Adds underline on hover */
+}
 /* Responsive Fixes */
 @media (max-width: 600px) {
     .buttons {
