@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./Home.css";
 import axios from "axios"; // Ensure you have axios installed
 
+const BACKEND_URL = "https://share247.onrender.com"; // Updated backend URL
+
 const Home = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [shortLinks, setShortLinks] = useState([]);
@@ -37,7 +39,7 @@ const Home = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/upload",
+        `${BACKEND_URL}/upload`, // Use deployed backend URL
         formData,
         {
           headers: {
@@ -131,6 +133,8 @@ const Home = () => {
             </div>
           )}
         </div>
+
+        {/* Short Links Display */}
         {shortLinks.length > 0 && (
           <div className="short-links">
             <h3>Generated Links:</h3>
