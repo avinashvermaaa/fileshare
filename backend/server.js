@@ -6,12 +6,11 @@ import cloudinaryModule from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 import { v4 as uuidv4 } from "uuid";
 import admin from "firebase-admin";
-import fs from "fs";
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const SERVER_URL = process.env.SERVER_URL || `http://localhost:${PORT}`;
+const SERVER_URL = process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
 
 // Enable CORS for frontend-backend communication
 app.use(cors());
@@ -26,14 +25,14 @@ cloudinary.config({
 });
 
 // Firebase Setup
-const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH;
-
-if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
-  console.error("❌ Firebase service account key file is missing!");
+if (!process.env.FIREBASE_SERVICE_ACCOUNT) {
+  console.error(
+    "❌ Firebase service account JSON is missing in environment variables!"
+  );
   process.exit(1);
 }
 
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -56,48 +55,58 @@ const upload = multer({ storage });
 
 // File upload endpoint
 app.post("/upload", upload.array("files"), async (req, res) => {
-  if (!req.files || req.files.length === 0) {
-    return res.status(400).json({ message: "No files uploaded" });
-  }
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
+    }
 
-  // Get the Cloudinary URLs for the uploaded files
-  const fileUrls = req.files.map((file) => file.path);
-  const shortLinks = [];
-  const expirationTime = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+    // Get the Cloudinary URLs for the uploaded files
+    const fileUrls = req.files.map((file) => file.path);
+    const shortLinks = [];
+    const expirationTime = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
 
-  for (const url of fileUrls) {
-    const shortId = uuidv4().slice(0, 6);
-    await db.collection("files").doc(shortId).set({
-      url,
-      expiresAt: expirationTime,
+    for (const url of fileUrls) {
+      const shortId = uuidv4().slice(0, 6);
+      await db.collection("files").doc(shortId).set({
+        url,
+        expiresAt: expirationTime,
+      });
+      shortLinks.push(`${SERVER_URL}/file/${shortId}`);
+    }
+
+    res.status(200).json({
+      message: "Files uploaded successfully!",
+      fileUrls,
+      shortLinks,
     });
-    shortLinks.push(`${SERVER_URL}/file/${shortId}`);
+  } catch (error) {
+    console.error("❌ Error uploading files:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-
-  res.status(200).json({
-    message: "Files uploaded successfully!",
-    fileUrls,
-    shortLinks,
-  });
 });
 
 // Retrieve File by Short Link
 app.get("/file/:id", async (req, res) => {
-  const { id } = req.params;
-  const fileRef = db.collection("files").doc(id);
-  const fileDoc = await fileRef.get();
+  try {
+    const { id } = req.params;
+    const fileRef = db.collection("files").doc(id);
+    const fileDoc = await fileRef.get();
 
-  if (!fileDoc.exists) {
-    return res.status(404).json({ message: "❌ File not found or expired" });
+    if (!fileDoc.exists) {
+      return res.status(404).json({ message: "❌ File not found or expired" });
+    }
+
+    const fileData = fileDoc.data();
+    if (Date.now() > fileData.expiresAt) {
+      await fileRef.delete();
+      return res.status(410).json({ message: "⚠️ File link expired" });
+    }
+
+    res.redirect(fileData.url);
+  } catch (error) {
+    console.error("❌ Error retrieving file:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
-
-  const fileData = fileDoc.data();
-  if (Date.now() > fileData.expiresAt) {
-    await fileRef.delete();
-    return res.status(410).json({ message: "⚠️ File link expired" });
-  }
-
-  res.redirect(fileData.url);
 });
 
 // Start Server
