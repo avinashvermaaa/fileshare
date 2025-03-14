@@ -1,4 +1,5 @@
-# Sharekaro.io
+# Sharekaro.io 
+live:-  https://share247.netlify.app/
 
 Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! file-sharing web application built with **React, Node.js, Cloudinary, and Multer**.
 
@@ -36,14 +37,7 @@ Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! fi
 2. **Set up the backend**
    ```sh
    cd backend
-   npm install
-   ```
-   Create a `.env` file in the backend directory and add:
-   ```env
-   PORT=5000
-   CLOUDINARY_CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_api_key
-   CLOUDINARY_API_SECRET=your_api_secret
+   npm install --legacy-peer-deps
    ```
    Start the backend server:
    ```sh
