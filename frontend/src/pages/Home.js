@@ -151,7 +151,7 @@ const Home = () => {
       {/* Footer */}
       <footer className="footer">
         &copy; 2024 Fileshare247 |
-     /*  <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/">LinkedIn </a>|*/
+        {/*  <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/">LinkedIn </a>|*/}
         <a href="https://www.instagram.com/avinash_vermaa">Instagram</a>| Made with 💙 in India.
       </footer>
     </div>
