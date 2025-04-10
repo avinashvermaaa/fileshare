@@ -136,10 +136,10 @@ const Home = () => {
               <table>
                 <thead>
                   <tr>
-                    <th>S.no.</th>
+                    <th>0.</th>
                     <th>File Name</th>
-                    <th>Preview</th>
-                    <th>Action</th>
+                    <th>View</th>
+                    <th>X</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -149,12 +149,12 @@ const Home = () => {
                       <td>{file.name}</td>
                       <td>
                         <button className="preview-button" onClick={() => handlePreview(file)}>
-                        <MdRemoveRedEye size={24} color="black" />
+                        <MdRemoveRedEye size={18} color="black" />
                         </button>
                       </td>
                       <td>
                         <button className="remove-button" onClick={() => handleRemoveFile(index)}>
-                          Remove
+                        <FaTimes />
                         </button>
                       </td>
                     </tr>
