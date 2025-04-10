@@ -168,6 +168,33 @@ th {
  background-color: black;
  color: white;
 }
+
+/* Scroll bar for table items */
+.table-wrapper {
+     max-height: 300px;
+     overflow-y: auto;
+     width: 100%;
+     border-radius: 6px;
+     margin-top: 10px;
+    }
+    
+    /* Sticky table headers */
+    .table-wrapper thead th {
+     position: sticky;
+     top: 0;
+     z-index: 2;
+    }
+    
+    /* Optional: style the scrollbar */
+    .table-wrapper::-webkit-scrollbar {
+     width: 6px;
+    }
+    .table-wrapper::-webkit-scrollbar-thumb {
+     background-color: #aaa;
+     border-radius: 5px;
+    }
+    
+
 /* remove item from table */
 .remove-button {
      background-color: black;
@@ -372,4 +399,8 @@ th {
     .header {
       font-size: 2rem;
     }
+    
+    .table-wrapper {
+        max-height: 200px;
+      }
   }

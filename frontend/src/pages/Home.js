@@ -133,6 +133,7 @@ const Home = () => {
           {selectedFiles.length > 0 && (
             <div className="file-list">
               <p className="file-count">Selected Files: {selectedFiles.length}</p>
+              <div className="table-wrapper">
               <table>
                 <thead>
                   <tr>
@@ -161,6 +162,7 @@ const Home = () => {
                   ))}
                 </tbody>
               </table>
+</div>
             </div>
           )}
         </div>
