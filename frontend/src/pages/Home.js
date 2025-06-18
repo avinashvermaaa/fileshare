@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import axios from "axios";
 import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaEnvelope, FaSnapchat, } from "react-icons/fa";
@@ -13,6 +13,8 @@ const Home = () => {
   const [isSending, setIsSending] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(null);
   const [previewFile, setPreviewFile] = useState(null); // For modal
+  const [totalSize, setTotalSize] = useState(0); // For total file size
+
 
   const handlePreview = (file) => {
     setPreviewFile(file);
@@ -96,13 +98,34 @@ const Home = () => {
     }
   };
 
+    // Calculate the total size of the selected files whenever selectedFiles changes
+  useEffect(() => {
+    const size = selectedFiles.reduce((acc, file) => acc + file.size, 0);
+    setTotalSize(size);
+  }, [selectedFiles]);
 
+  // Convert size to a readable format (KB, MB, GB)
+  const formatFileSize = (size) => {
+    if (size < 1024) return `${size} B`;
+    const kb = size / 1024;
+    if (kb < 1024) return `${kb.toFixed(2)} KB`;
+    const mb = kb / 1024;
+    if (mb < 1024) return `${mb.toFixed(2)} MB`;
+    const gb = mb / 1024;
+    return `${gb.toFixed(2)} GB`;
+  };
+
+
+  // Render the component (Main Content section)
   return (
     <div className="container">
       <div className="header">
         FileShare247
-        <p className="sub-header1">
-          Next-Gen File Sharing 📁 :- Lightning Fast 🚀, Rock-Solid Secure 🔐 & Hassle-Free ✨!
+        <p className="subheader">
+          Next-Gen File Sharing 📁 :&nbsp;
+          <span className="animate-text lightning">Lightning Fast 🚀,</span>
+          <span className="animate-text rock-solid">Rock-Solid Secure 🔐</span>
+          <span className="animate-text hassle-free"> & Hassle-Free ✨</span>
         </p>
       </div>
 
@@ -132,7 +155,7 @@ const Home = () => {
 
           {selectedFiles.length > 0 && (
             <div className="file-list">
-              <p className="file-count">Selected Files: {selectedFiles.length}</p>
+              <p className="file-count">Files Count: {selectedFiles.length} | Total Size: {formatFileSize(totalSize)}</p>
               <div className="table-wrapper">
               <table>
                 <thead>
@@ -162,8 +185,8 @@ const Home = () => {
                   ))}
                 </tbody>
               </table>
-</div>
             </div>
+          </div>
           )}
         </div>
 
@@ -186,14 +209,14 @@ const Home = () => {
 
       <footer className="footer">
         <div className="footer-content">
-          <span>© 2024 Fileshare247 |</span>
+          <a href="https://github.com/avinashvermaaa" target="_blank" rel="noopener noreferrer"> <FaGithub className="social-icon github" /> </a>
+          <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/" target="_blank" rel="noopener noreferrer"> <FaLinkedin className="social-icon linkedin" /> </a> 
           <a href="https://www.instagram.com/avinash_vermaa" target="_blank" rel="noopener noreferrer"> <FaInstagram className="social-icon instagram" /> </a>
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"> <FaLinkedin className="social-icon linkedin" /> </a> 
+          <a href="mailto:code6969nation@gmail.com.com" target="_blank" rel="noopener noreferrer"> <FaEnvelope className="social-icon envelope" /> </a>
           <a href="https://x.com" target="_blank" rel="noopener noreferrer"> <FaTwitter className="social-icon twitter" /> </a>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer"> <FaGithub className="social-icon github" /> </a>
-          <a href="mailto:notadded@mail.com" target="_blank" rel="noopener noreferrer"> <FaEnvelope className="social-icon envelope" /> </a>
           <a href="https://www.snapchat.com" target="_blank" rel="noopener noreferrer"> <FaSnapchat className="social-icon snapchat" /> </a>
-          <span>| Made with 💙 in India.</span>
+          <span> <strong>| © 2025 Fileshare247</strong> </span>
+          <span> <strong>| Made with 💙 in India.</strong> </span>
         </div>
       </footer>
 
