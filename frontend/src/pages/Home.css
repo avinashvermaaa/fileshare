@@ -18,7 +18,8 @@
 
 .header {
     width: 100%;
-    color: rgba(185, 50, 50, 1);
+    color: brown;
+    /* color: rgba(185, 50, 50, 1); */
     font-size: 2.8rem;
     font-weight: 700;
     text-align: center;
@@ -147,7 +148,7 @@
     border-radius: 8px;
     border: 3px none black;
     text-align: center;
-    width: 32%;
+    width: 80%;
     max-width: 550px;
     box-sizing: border-box;
 }
@@ -288,7 +289,7 @@ th {
 }
 
 .modal {
-    background: white;
+    background: rgb(233, 208, 208);
     padding: 20px;
     width: 90%;
     height: 90%;
@@ -367,18 +368,17 @@ th {
     width: 100%;
     height: 40px;
     background-color: transparent;
-    color: black;
+    color: brown;
     font-size: 0.875rem;
-    /* padding: 10px; */
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 25px;
     margin-top: auto;
     text-align: center;
 }
         
 .footer a {
     text-decoration: none;
-    color: black;
+    color: whitesmoke;
 }
 
 .footer .footer-content {
@@ -423,27 +423,36 @@ th {
 
 
 
-/* Responsive tweaks for small screens */
+/* Responsive tweaks for very small screens (smartphones) */
 @media screen and (max-width: 480px) {
     .upload-section {
-    padding: 16px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .upload-section h2 {
+        font-size: 1.2rem; /* Further reduce header font size */
+    }
+
+    .file-count {
+        font-size: 0.8rem; /* Further reduce font size */
     }
 
     .button {
-    padding: 8px 16px;
-    font-size: 14px;
+        padding: 8px 16px;
+        font-size: 14px;
     }
 
     .remove-button, .copy-button {
-    font-size: 12px;
-    padding: 5px 8px;
+        font-size: 10px;
+        padding: 5px 8px;
     }
 
     .header {
-    font-size: 2rem;
+        font-size: 1.8rem; /* Adjust header size for small devices */
     }
-    
+
     .table-wrapper {
-        max-height: 200px;
+        max-height: 150px; /* Further reduce height */
     }
 }
