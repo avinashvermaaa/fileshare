@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaEnvelope, FaSnapchat, } from "react-icons/fa";
 import { FaTimes } from 'react-icons/fa';
 import { MdRemoveRedEye } from 'react-icons/md';
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
 const BACKEND_URL = "https://share247.onrender.com";
 
@@ -12,8 +13,9 @@ const Home = () => {
   const [shortLinks, setShortLinks] = useState([]);
   const [isSending, setIsSending] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(null);
-  const [previewFile, setPreviewFile] = useState(null); // For modal
-  const [totalSize, setTotalSize] = useState(0); // For total file size
+  const [previewFile, setPreviewFile] = useState(null); 
+  const [totalSize, setTotalSize] = useState(0); 
+  const [qrCodes, setQrCodes] = useState({});
 
 
   const handlePreview = (file) => {
@@ -115,12 +117,49 @@ const Home = () => {
     return `${gb.toFixed(2)} GB`;
   };
 
+const handleGenerateQR = (link, index) => {
+  if (!link) return;
+
+  if (typeof window.QRCode === 'undefined') {
+    alert("QRCode library not loaded. Make sure it's included in index.html");
+    return;
+  }
+
+  window.QRCode.toDataURL(link, { errorCorrectionLevel: 'H' }, (err, url) => {
+    if (err) {
+      console.error("QR code generation failed:", err);
+      alert("Failed to generate QR Code.");
+      return;
+    }
+
+    setQrCodes((prev) => ({
+      ...prev,
+      [index]: {
+        url,
+        filename: `qr_code_${index + 1}`
+      }
+    }));
+  });
+};
+
+
+  const handleDownloadQR = (index) => {
+    const qr = qrCodes[index];
+    if (!qr) return;
+
+    const a = document.createElement('a');
+    a.href = qr.url;
+    a.download = `${qr.filename}.png`;
+    a.click();
+  };
+
+
 
   // Render the component (Main Content section)
   return (
     <div className="container">
       <div className="header">
-        FileShare247
+        <div class="codespr-theme-bg-pink-pussy">FileShare247</div>
         <p className="subheader">
           Next-Gen File Sharing 📁 :&nbsp;
           <span className="animate-text lightning">Lightning Fast 🚀,</span>
@@ -201,6 +240,19 @@ const Home = () => {
                 <button className="copy-button" onClick={() => handleCopyLink(link, index)}>
                   {copiedIndex === index ? "Copied!" : "Copy"}
                 </button>
+                <button className="copy-button" onClick={() => handleGenerateQR(link, index)}>
+                  Generate QR
+                </button>
+
+                {qrCodes[index] && (
+                  <div style={{ marginTop: '10px', textAlign: 'center' }}>
+                    <img src={qrCodes[index].url} alt="QR Code" style={{ maxWidth: '150px' }} />
+                    <br />
+                    <button className="copy-button" onClick={() => handleDownloadQR(index)}>
+                      Download QR
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
