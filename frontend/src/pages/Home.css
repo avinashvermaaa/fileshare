@@ -26,13 +26,13 @@ body {
 .header {
   width: 100%;
   color: white;
-  font-size: 2.8rem;
+  font-size: 3.8rem;
   font-weight: 700;
   text-align: center;
 }
 
 .codespr-theme-bg-pink-pussy{
-  background: linear-gradient(135deg, #007bff, red); 
+  background: linear-gradient(135deg, #f93,white ,#138808); 
   -webkit-background-clip: text; 
   color: transparent; 
   display: inline; 
@@ -40,7 +40,7 @@ body {
 
 /* Subheader Styles */
 .subheader {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 500;
   text-align: center;
   margin: 5px auto;
@@ -52,10 +52,13 @@ body {
   opacity: 0;
   animation: fadeIn 1s forwards;
   display: inline-block;
+  margin-right: 5px;
+  font-size: 2rem;
 }
 
 .animate-text.lightning {
   animation-delay: 1s;
+  color : #f93;
 }
 
 .animate-text.rock-solid {
@@ -64,6 +67,7 @@ body {
 
 .animate-text.hassle-free {
   animation-delay: 3s;
+  color : #138808;
 }
 
 @keyframes fadeIn {
@@ -372,24 +376,24 @@ th {
 
 /* Footer Styles */
 .footer {
-  /* display: flex; */
-  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 40px;
   background-color: transparent;
-  color: white;
   font-size: 0.875rem;
-  padding-top: 10px;
-  padding-bottom: 25px;
-  margin-top: auto;
+  /* padding-bottom: 40px; */
   text-align: center;
 }
 
 .footer a {
   text-decoration: none;
-  color: whitesmoke;
+  color: #f93;
+}
+.footer-white{
+  color: white;
+}
+.footer-green{
+  color: #138808;
 }
 
 .footer .footer-content {
@@ -433,9 +437,6 @@ th {
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
 
   .header {
     font-size: 20px;
@@ -452,7 +453,7 @@ th {
 
   .button {
     width: 100%;
-    max-width: 300px;
+    max-width: 150px;
     margin: 10px 0;
   }
 
@@ -485,22 +486,33 @@ th {
   }
 
   .social-icon {
-    margin: 10px;
+    margin-right: 10px;
+  }
+
+  .footer{
+    padding-bottom: 40px;
+  }
+  .footer-content {
+    font-size: 12px;
+    padding-bottom: 40px;
+  }
+  .flexii{
+    display: flex;
+    flex-direction: column;
   }
 }
 
 /* Very Small Screen (Mobile phones) */
 @media (max-width: 480px) {
-  .container {
-    padding: 5px;
-  }
 
   .header {
-    font-size: 18px;
+    font-size: 50px;
   }
 
   .subheader {
-    font-size: 14px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
   }
 
   .button {
@@ -519,10 +531,18 @@ th {
     font-size: 12px;
   }
 
+  .footer{
+    padding-bottom: 40px;
+  }
   .footer-content {
     font-size: 12px;
+    padding-bottom: 20px;
   }
-
+  
+  .flexii{
+    display: flex;
+    flex-direction: column;
+  }
   .modal-content-img {
     width: 100%;
   }

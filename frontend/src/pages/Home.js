@@ -153,18 +153,18 @@ const handleGenerateQR = (link, index) => {
     a.click();
   };
 
-
-
-  // Render the component (Main Content section)
+  // (Main Content section)
   return (
     <div className="container">
       <div className="header">
         <div class="codespr-theme-bg-pink-pussy">FileShare247</div>
         <p className="subheader">
-          Next-Gen File Sharing 📁 :&nbsp;
-          <span className="animate-text lightning">Lightning Fast 🚀,</span>
-          <span className="animate-text rock-solid">Rock-Solid Secure 🔐</span>
-          <span className="animate-text hassle-free"> & Hassle-Free ✨</span>
+          {/* Next-Gen File Sharing 📁 :&nbsp; */}
+          <span className="animate-text lightning"> Bhai Tu Bas</span>
+          <span className="animate-text rock-solid">Share kar🤝</span>
+          <span className="animate-text hassle-free glowing-emoji">Baaki Hum Par! 
+            <span className="emoji"> 😎</span>🔥
+          </span>
         </p>
       </div>
 
@@ -267,8 +267,10 @@ const handleGenerateQR = (link, index) => {
           <a href="mailto:code6969nation@gmail.com.com" target="_blank" rel="noopener noreferrer"> <FaEnvelope className="social-icon envelope" /> </a>
           <a href="https://x.com" target="_blank" rel="noopener noreferrer"> <FaTwitter className="social-icon twitter" /> </a>
           <a href="https://www.snapchat.com" target="_blank" rel="noopener noreferrer"> <FaSnapchat className="social-icon snapchat" /> </a>
-          <span> <strong>| © 2025 Fileshare247</strong> </span>
-          <span> <strong>| Made with 💙 in India.</strong> </span>
+          <div className="flexii">
+          <span className="footer-white"> <strong>| © 2025 Fileshare247</strong> </span>
+          <span className="footer-green"> <strong>| Made with 💙 in India.</strong> </span>
+          </div>
         </div>
       </footer>
 
