@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Home.css";
 import axios from "axios";
-import { FaLinkedin, FaTwitter, FaInstagram, FaGithub, FaEnvelope, FaSnapchat, } from "react-icons/fa";
+import { FaLinkedin,  FaInstagram, FaEnvelope, } from "react-icons/fa";
+// import { FaTwitter, FaGithub, FaSnapchat, } from "react-icons/fa";
 import { FaTimes } from 'react-icons/fa';
 import { MdRemoveRedEye } from 'react-icons/md';
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
@@ -157,12 +158,12 @@ const handleGenerateQR = (link, index) => {
   return (
     <div className="container">
       <div className="header">
-        <div class="codespr-theme-bg-pink-pussy">FileShare247</div>
+        <div class="codespr-theme-bg">FileShare247</div>
         <p className="subheader">
           {/* Next-Gen File Sharing 📁 :&nbsp; */}
-          <span className="animate-text lightning"> Bhai Tu Bas</span>
+          <span className="animate-text lightning"> Bhai tu bas</span>
           <span className="animate-text rock-solid">Share kar🤝</span>
-          <span className="animate-text hassle-free glowing-emoji">Baaki Hum Par! 
+          <span className="animate-text hassle-free glowing-emoji">Baaki hum par! 
             <span className="emoji"> 😎</span>🔥
           </span>
         </p>
@@ -261,12 +262,9 @@ const handleGenerateQR = (link, index) => {
 
       <footer className="footer">
         <div className="footer-content">
-          <a href="https://github.com/avinashvermaaa" target="_blank" rel="noopener noreferrer"> <FaGithub className="social-icon github" /> </a>
           <a href="https://www.linkedin.com/in/avinash-verma-20946b21b/" target="_blank" rel="noopener noreferrer"> <FaLinkedin className="social-icon linkedin" /> </a> 
           <a href="https://www.instagram.com/avinash_vermaa" target="_blank" rel="noopener noreferrer"> <FaInstagram className="social-icon instagram" /> </a>
-          <a href="mailto:code6969nation@gmail.com.com" target="_blank" rel="noopener noreferrer"> <FaEnvelope className="social-icon envelope" /> </a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer"> <FaTwitter className="social-icon twitter" /> </a>
-          <a href="https://www.snapchat.com" target="_blank" rel="noopener noreferrer"> <FaSnapchat className="social-icon snapchat" /> </a>
+          <a href="mailto:corporate4avinash@gmail.com" target="_blank" rel="noopener noreferrer"> <FaEnvelope className="social-icon envelope" /> </a>
           <div className="flexii">
           <span className="footer-white"> <strong>| © 2025 Fileshare247</strong> </span>
           <span className="footer-green"> <strong>| Made with 💙 in India.</strong> </span>
