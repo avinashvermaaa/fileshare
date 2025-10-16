@@ -1,70 +1,76 @@
-# Getting Started with Create React App
+# Sharekaro.io 
+live:-  https://fileshare247.netlify.app/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! file-sharing web application built with **React, Node.js, Cloudinary, and Multer**.
 
-## Available Scripts
+## 📌 Features
 
-In the project directory, you can run:
+* Upload multiple files and share them easily
+* Files are stored securely on Cloudinary
+* Short links generated for quick file access
+* Fully responsive UI built with React
+* Backend powered by Node.js and Express
+* Seamless integration with Cloudinary for file storage
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🚀 Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Frontend:
+- React.js
+- Axios
+- CSS & Tailwind CSS
 
-### `npm test`
+### Backend:
+- Node.js
+- Express.js
+- Multer (for file handling)
+- Cloudinary (for file storage)
+- Short Unique ID (for short links)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 📥 Installation & Setup
 
-### `npm run build`
+1. **Clone the repository**
+   ```sh
+   git clone https://github.com/avinashvermaaa/fileshare.git
+   cd fileshare
+   ```
+2. **Set up the backend**
+   ```sh
+   cd backend
+   npm install --legacy-peer-deps
+   ```
+   Start the backend server:
+   ```sh
+   npm start
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Set up the frontend**
+   ```sh
+   cd ../frontend
+   npm install
+   npm run dev
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🔗 Usage
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Upload files using the **Upload Files** button.
+2. Click **Send Files** to generate a short link for easy sharing.
+3. Access the uploaded files via the generated short link.
+4. Manage files directly from the UI.
 
-### `npm run eject`
+## API Endpoints
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- `POST /upload` → Uploads files to Cloudinary & returns a short link. `headers: { "Content-Type": "multipart/form-data" }`
+- `GET /file/:shortId` → Retrieves the file from Cloudinary using the short link.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 💙 Contributing
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Contributions are welcome! Feel free to fork the repository and submit pull requests.
 
-## Learn More
+---
+Made with 💙 by [Avinash Verma]
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Happy sharing with **fileshare247.io**! 🎉
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
