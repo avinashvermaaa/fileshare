@@ -31,8 +31,8 @@ Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! fi
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/avinashvermaaa/sharekaro.io.git
-   cd sharekaro.io
+   git clone https://github.com/avinashvermaaa/fileshare.git
+   cd fileshare
    ```
 2. **Set up the backend**
    ```sh
@@ -48,7 +48,7 @@ Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! fi
    ```sh
    cd ../frontend
    npm install
-   npm start
+   npm run dev
    ```
 
 ## 🔗 Usage
@@ -60,7 +60,7 @@ Effortlessly Send & Receive Files - Secure🔐, Fast🚀, and Hassle-Free✨! fi
 
 ## API Endpoints
 
-- `POST /upload` → Uploads files to Cloudinary & returns a short link.
+- `POST /upload` → Uploads files to Cloudinary & returns a short link. `headers: { "Content-Type": "multipart/form-data" }`
 - `GET /file/:shortId` → Retrieves the file from Cloudinary using the short link.
 
 
@@ -71,4 +71,6 @@ Contributions are welcome! Feel free to fork the repository and submit pull requ
 ---
 Made with 💙 by [Avinash Verma]
 
-Happy sharing with **Sharekaro.io**! 🎉
+Happy sharing with **fileshare247.io**! 🎉
+
+
