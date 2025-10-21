@@ -1,21 +1,16 @@
 import admin from "firebase-admin";
-import dotenv from "dotenv";
-import fs from "fs";
+import { config } from "./config.js";
 
-dotenv.config();
-
-// Load Firebase credentials from JSON file
-const serviceAccountPath = process.env.FIREBASE_SERVICE_ACCOUNT_KEY_PATH;
-if (!serviceAccountPath || !fs.existsSync(serviceAccountPath)) {
-  console.error("❌ Firebase service account key file is missing!");
+if (!config.firebase.serviceAccount) {
+  console.error("Firebase service account JSON is missing in environment variables!");
   process.exit(1);
 }
 
-const serviceAccount = JSON.parse(fs.readFileSync(serviceAccountPath, "utf8"));
+const serviceAccount = JSON.parse(config.firebase.serviceAccount);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  databaseURL: config.firebase.databaseURL,
 });
 
 const db = admin.firestore();

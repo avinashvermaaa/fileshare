@@ -1,34 +1,35 @@
 import express from "express";
-import upload from "../utils/multer.js";
-import File from "../models/File.js";
-
+import { db } from "../firebase.js";
+import { logRequest } from '../utils/logger.js';
+import { config } from "../config.js";
 const router = express.Router();
 
-// Upload File Route
-router.post("/upload", upload.single("file"), async (req, res) => {
+router.get("/file/:id", async (req, res) => {
   try {
-    const { originalname } = req.file;
-    const file = await File.create({
-      filename: originalname,
-      url: req.file.path,
+    await logRequest({
+      ip: req.ip,
+      endpoint: `/file/${req.params.id}`,
+      method: "GET",
     });
+    const { id } = req.params;
+    const fileRef = db.collection("files").doc(id);
+    const fileDoc = await fileRef.get();
 
-    res.json({ fileId: file._id, url: file.url });
+    if (!fileDoc.exists) {
+      return res.status(404).json({ message: "File not found or expired" });
+    }
+
+    const fileData = fileDoc.data();
+    if (Date.now() > fileData.expiresAt) {
+      await fileRef.delete();
+      return res.status(410).json({ message: "⚠️ File link expired" });
+    }
+
+    res.redirect(fileData.url);
   } catch (error) {
-    res.status(500).json({ error: "File upload failed" });
+    console.error("Error retrieving file:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
-// Get File Route
-router.get("/:id", async (req, res) => {
-  try {
-    const file = await File.findById(req.params.id);
-    if (!file) return res.status(404).json({ error: "File not found" });
-
-    res.json({ url: file.url });
-  } catch (error) {
-    res.status(500).json({ error: "Error retrieving file" });
-  }
-});
-
-export default router;
+export { router };

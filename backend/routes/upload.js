@@ -1,30 +1,47 @@
-const express = require("express");
-const multer = require("multer");
-const cloudinary = require("../cloudinary");
-const { CloudinaryStorage } = require("multer-storage-cloudinary");
-
-const router = express.Router();
-
-// Multer storage for Cloudinary
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "sharekaro-files",
-    resource_type: "auto",
-  },
-});
+import multer from "multer";
+import { storage } from "../cloudinary.js";
+import { db } from "../firebase.js";
+import { v4 as uuidv4 } from "uuid";
+import { config } from "../config.js";
+import { logRequest } from '../utils/logger.js';
 
 const upload = multer({ storage });
 
-// Upload endpoint
-router.post("/upload", upload.array("files"), async (req, res) => {
+const handleFileUpload = async (req, res) => {
   try {
-    const fileUrls = req.files.map((file) => file.path);
-    res.json({ success: true, fileUrls });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "Upload failed" });
-  }
-});
 
-module.exports = router;
+    await logRequest({
+      ip: req.ip,
+      endpoint: "/upload",
+      method: "POST",
+    });
+
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "No files uploaded" });
+    }
+
+    const fileUrls = req.files.map((file) => file.path);
+    const shortLinks = [];
+    const expirationTime = Date.now() + 24 * 60 * 60 * 1000;
+
+    for (const url of fileUrls) {
+      const shortId = uuidv4().slice(0, 6);
+      await db.collection("files").doc(shortId).set({
+        url,
+        expiresAt: expirationTime,
+      });
+      shortLinks.push(`${config.server.serverUrl}/file/${shortId}`);
+    }
+
+    res.status(200).json({
+      message: "Files uploaded successfully!",
+      fileUrls,
+      shortLinks,
+    });
+  } catch (error) {
+    console.error("Error uploading files:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export { upload, handleFileUpload };
